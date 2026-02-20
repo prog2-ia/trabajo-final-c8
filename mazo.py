@@ -1,3 +1,5 @@
+from tarjeta import Tarjeta
+
 class Mazo:
     def __init__(self, nombre):
     def anadir_tarjeta(self):
