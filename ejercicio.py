@@ -1,2 +1,2 @@
 class Ejercicio:
-    pass
+    def __init__(self, tarjeta, puntuacion):
