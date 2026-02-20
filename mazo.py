@@ -1,6 +1,9 @@
 from tarjeta import Tarjeta
 
 class Mazo:
+    '''
+    Representa un conjunto de tarjetas organizadas bajo un mismo nombre o temática. Permite añadir, eliminar y mezclar tarjetas, además de unir y comparar mazos mediante sobrecarga de operadores. Gestiona el contenido que se utilizará en los ejercicios.
+    '''
     def __init__(self, nombre):
     def anadir_tarjeta(self):
 
