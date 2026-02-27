@@ -5,6 +5,10 @@ class Tarjeta:
     Es la unidad básica del sistema.
     ''''
     def __init__(self, palabra, traduccion, categoria, nivel_dificultad):
+        self.palabra=palabra
+        self.traduccion=traduccion
+        self.categoria=categoria
+        self.nivel_dificultad=nivel_dificultad
 
     def guardar_info(self):
 
