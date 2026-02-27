@@ -1,0 +1,2 @@
+class EjercicioEscritura(Ejercicio):
+    pass

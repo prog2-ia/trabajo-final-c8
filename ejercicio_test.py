@@ -1,0 +1,2 @@
+class EjercicioTipoTest(Ejercicio):
+    pass
