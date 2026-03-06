@@ -136,7 +136,7 @@ class Mazo:
         other: Mazo
             Mazo que se desea combinar con el actual.
 
-        Retorna:
+        Devuelve:
         Mazo
             Nuevo mazo que contiene las tarjetas de ambos mazos sin duplicados.
         """
@@ -162,7 +162,7 @@ class Mazo:
         other: Mazo
             Mazo con el que se quiere comparar.
 
-        Retorna:
+        Devuelve:
         bool
             True si ambos mazos contienen las mismas tarjetas.
         """
@@ -188,7 +188,7 @@ class Mazo:
         """
         Devuelve una representación del mazo.
 
-        Retorna:
+        Devuelve:
         str
             Nombre del mazo y número de tarjetas que contiene.
         """

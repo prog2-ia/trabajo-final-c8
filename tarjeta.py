@@ -42,7 +42,6 @@ class Tarjeta:
         Inicializa una instancia de la clase Tarjeta.
 
         Parámetros:
-        -----------
         palabra: str
             Palabra en el idioma original.
         traduccion: str
@@ -98,7 +97,7 @@ class Tarjeta:
         respuesta: str
             Respuesta dada por el usuario.
 
-        Retorna:
+        Devuelve:
         --------
         bool
             True si la respuesta es correcta, False en caso contrario.
@@ -111,8 +110,7 @@ class Tarjeta:
         """
         Devuelve una representación en texto de la tarjeta.
 
-        Retorna:
-        --------
+        Devuelve:
         str
             Información básica de la tarjeta.
         """
@@ -127,12 +125,10 @@ class Tarjeta:
         Compara dos tarjetas para verificar si son iguales.
 
         Parámetros:
-        -----------
         other: Tarjeta
             Otra tarjeta a comparar.
 
-        Retorna:
-        --------
+        Devuelve:
         bool
             True si tienen la misma palabra y traducción.
         """
