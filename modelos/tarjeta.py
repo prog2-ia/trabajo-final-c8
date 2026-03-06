@@ -11,7 +11,6 @@ Clases:
 
 class Tarjeta:
     """
-    dfs
     Clase que representa una tarjeta de vocabulario.
 
     Atributos:
