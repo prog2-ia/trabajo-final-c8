@@ -1,7 +1,7 @@
 """
 Módulo para la gestión de tarjetas de vocabulario.
 
-Este módulo define la clase `Tarjeta`, que representa una palabra con su traducción,
+Este módulo define la clase Tarjeta, que representa una palabra con su traducción,
 categoría y nivel de dificultad. Permite validar datos, comprobar respuestas del
 usuario y comparar tarjetas para evitar duplicados.
 
