@@ -93,12 +93,10 @@ class Tarjeta:
         Comprueba si la respuesta proporcionada coincide con la traducción.
 
         Parámetros:
-        -----------
         respuesta: str
             Respuesta dada por el usuario.
 
         Devuelve:
-        --------
         bool
             True si la respuesta es correcta, False en caso contrario.
         """

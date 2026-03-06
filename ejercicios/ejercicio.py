@@ -115,7 +115,7 @@ class Ejercicio(ABC):
         """
         Devuelve la puntuación obtenida en el ejercicio.
 
-        Retorna:
+        Devuelve:
         int o float
             Devuelve la puntuación del ejercicio si la respuesta fue correcta,
             o 0 en caso contrario.
@@ -128,7 +128,7 @@ class Ejercicio(ABC):
     def __str__(self):
         """
         Devuelve una representación en texto del ejercicio.
-        Retorna:
+        Devuelve:
         str
             Muestra el tipo de ejercicio y la palabra asociada.
         """
