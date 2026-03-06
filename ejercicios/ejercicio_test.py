@@ -1,63 +1,62 @@
-class EjercicioTipoTest(Ejercicio):
-    from ejercicios.ejercicio import Ejercicio
-    import random
+from ejercicios.ejercicio import Ejercicio
+import random
 
-    class EjercicioTest(Ejercicio):
+class EjercicioTest(Ejercicio):
+    """
+    Clase que representa un ejercicio tipo test.
+
+    En este ejercicio el usuario debe elegir la traducción correcta
+    entre varias opciones.
+    """
+
+    def __init__(self, tarjeta, opciones):
         """
-        Clase que representa un ejercicio tipo test.
+        Inicializa un ejercicio tipo test.
 
-        En este ejercicio el usuario debe elegir la traducción correcta
-        entre varias opciones.
+        Parámetros:
+        tarjeta: Tarjeta
+            Tarjeta que contiene la palabra y su traducción correcta.
+        opciones: list
+            Lista de posibles respuestas (incluyendo la correcta).
+        """
+        super().__init__(tarjeta)
+
+        self.opciones = opciones
+        random.shuffle(self.opciones)
+
+    def mostrar(self):
+        """
+        Muestra el ejercicio y las opciones de respuesta.
         """
 
-        def __init__(self, tarjeta, opciones):
-            """
-            Inicializa un ejercicio tipo test.
+        print(f"Traduce la palabra: {self.tarjeta.palabra}")
 
-            Parámetros:
-            tarjeta: Tarjeta
-                Tarjeta que contiene la palabra y su traducción correcta.
-            opciones: list
-                Lista de posibles respuestas (incluyendo la correcta).
-            """
-            super().__init__(tarjeta)
+        letras = ["A", "B", "C", "D"]
 
-            self.opciones = opciones
-            random.shuffle(self.opciones)
+        for i, opcion in enumerate(self.opciones):
+            print(f"{letras[i]}) {opcion}")
 
-        def mostrar(self):
-            """
-            Muestra el ejercicio y las opciones de respuesta.
-            """
+    def comprobar_respuesta(self, respuesta):
+        """
+        Comprueba si la respuesta elegida por el usuario es correcta.
 
-            print(f"Traduce la palabra: {self.tarjeta.palabra}")
+        Parámetros:
+        respuesta: str
+            Letra de la opción elegida por el usuario (A, B, C o D).
 
-            letras = ["A", "B", "C", "D"]
+        Devuelve:
+        bool
+            True si la respuesta es correcta, False si es incorrecta.
+        """
+        letras = ["A", "B", "C", "D"]
 
-            for i, opcion in enumerate(self.opciones):
-                print(f"{letras[i]}) {opcion}")
+        indice = letras.index(respuesta.upper())
 
-        def comprobar_respuesta(self, respuesta):
-            """
-            Comprueba si la respuesta elegida por el usuario es correcta.
+        self.respondido = True
 
-            Parámetros:
-            respuesta: str
-                Letra de la opción elegida por el usuario (A, B, C o D).
+        if self.opciones[indice] == self.tarjeta.traduccion:
+            self.correcto = True
+        else:
+            self.correcto = False
 
-            Devuelve:
-            bool
-                True si la respuesta es correcta, False si es incorrecta.
-            """
-            letras = ["A", "B", "C", "D"]
-
-            indice = letras.index(respuesta.upper())
-
-            self.respondido = True
-
-            if self.opciones[indice] == self.tarjeta.traduccion:
-                self.correcto = True
-            else:
-                self.correcto = False
-
-            return self.correcto
+        return self.correcto

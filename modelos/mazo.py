@@ -8,8 +8,7 @@ mezclar tarjetas y combinar mazos mediante sobrecarga de operadores.
 Clases:
     - Mazo
 """
-
-from tarjeta import Tarjeta
+from modelos.tarjeta import Tarjeta
 import random
 
 class Mazo:

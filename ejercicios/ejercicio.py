@@ -8,7 +8,7 @@ Clases:
     - Ejercicio
 """
 
-from tarjeta import Tarjeta
+from modelos.tarjeta import Tarjeta
 from abc import ABC, abstractmethod
 
 

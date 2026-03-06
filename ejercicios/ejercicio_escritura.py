@@ -1,4 +1,4 @@
-from ejercicio import Ejercicio
+from ejercicios.ejercicio import Ejercicio
 
     class EjercicioEscritura(Ejercicio):
         """
