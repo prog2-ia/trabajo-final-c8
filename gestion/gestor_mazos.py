@@ -1,0 +1,2 @@
+class GestorMazos():
+    pass
