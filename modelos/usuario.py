@@ -1,56 +1,88 @@
 class Usuario:
+    """
+    Clase que representa a un usuario del sistema.
+
+    Almacena información sobre el progreso del usuario en los ejercicios
+    de vocabulario, incluyendo su puntuación total, número de ejercicios
+    realizados y número de aciertos.
+
+    Permite actualizar estadísticas tras cada ejercicio, calcular el
+    porcentaje de aciertos y comparar usuarios según su rendimiento.
+
+    Atributos:
+    nombre : str
+        Nombre del usuario.
+    puntuacion : int
+        Puntuación total acumulada por el usuario.
+    num_ejercicios : int
+        Número total de ejercicios realizados.
+    num_aciertos : int
+        Número de ejercicios respondidos correctamente.
+
+    Métodos:
+    __init__(self, nombre, puntuacion=0, num_ejercicios=0, num_aciertos=0)
+        Inicializa un nuevo usuario con sus estadísticas.
+
+    actualizar_progreso(correcto : bool, puntos : int) -> None
+        Actualiza las estadísticas del usuario tras realizar un ejercicio.
+
+    calcular_porcentaje() -> float
+        Calcula el porcentaje de aciertos del usuario.
+
+    estadisticas() -> str
+        Devuelve un resumen de las estadísticas del usuario.
+
+    __eq__(other) -> bool
+        Permite comparar si dos usuarios son iguales según su nombre.
+
+    __lt__(other) -> bool
+        Permite comparar usuarios según su puntuación.
+
+    __str__() -> str
+        Devuelve una representación en texto de las estadísticas del usuario.
+    """
 
     def __init__(self, nombre, puntuacion=0, num_ejercicios=0, num_aciertos=0):
+        """
+        Inicializa una instancia de la clase Usuario.
+
+        Parámetros:
+        nombre : str
+            Nombre del usuario.
+        puntuacion : int
+            Puntuación inicial del usuario.
+        num_ejercicios : int
+            Número inicial de ejercicios realizados.
+        num_aciertos : int
+            Número inicial de aciertos.
+        """
         self.nombre = nombre
         self.puntuacion = puntuacion
         self.num_ejercicios = num_ejercicios
         self.num_aciertos = num_aciertos
 
-
     @property
     def nombre(self):
+        """Devuelve el nombre del usuario."""
         return self._nombre
 
     @nombre.setter
     def nombre(self, valor):
+        """Establece el nombre del usuario validando que no esté vacío."""
         if not valor or valor.strip() == "":
             raise ValueError("El nombre no puede estar vacío")
         self._nombre = valor.strip()
 
-    @property
-    def puntuacion(self):
-        return self._puntuacion
-
-    @puntuacion.setter
-    def puntuacion(self, valor):
-        if not isinstance(valor, int):
-            raise TypeError("La puntuación debe ser un número entero")
-        if valor < 0:
-            raise ValueError("La puntuación no puede ser negativa")
-        self._puntuacion = valor
-
-    @property
-    def num_ejercicios(self):
-        return self._num_ejercicios
-
-    @num_ejercicios.setter
-    def num_ejercicios(self, valor):
-        if valor < 0:
-            raise ValueError("El número de ejercicios no puede ser negativo")
-        self._num_ejercicios = valor
-
-    @property
-    def num_aciertos(self):
-        return self._num_aciertos
-
-    @num_aciertos.setter
-    def num_aciertos(self, valor):
-        if valor < 0:
-            raise ValueError("El número de aciertos no puede ser negativo")
-        self._num_aciertos = valor
-
-
     def actualizar_progreso(self, correcto, puntos):
+        """
+        Actualiza las estadísticas del usuario tras completar un ejercicio.
+
+        Parámetros:
+        correcto : bool
+            Indica si el ejercicio fue respondido correctamente.
+        puntos : int
+            Puntos obtenidos en el ejercicio.
+        """
 
         self.num_ejercicios += 1
 
@@ -61,6 +93,10 @@ class Usuario:
     def calcular_porcentaje(self):
         """
         Calcula el porcentaje de aciertos del usuario.
+
+        Devuelve:
+        float
+            Porcentaje de aciertos sobre el total de ejercicios realizados.
         """
 
         if self.num_ejercicios == 0:
@@ -71,6 +107,10 @@ class Usuario:
     def estadisticas(self):
         """
         Devuelve un resumen de las estadísticas del usuario.
+
+        Devuelve:
+        str
+            Información del usuario y su rendimiento.
         """
 
         return (
@@ -81,10 +121,9 @@ class Usuario:
             f"Porcentaje de acierto: {self.calcular_porcentaje():.2f}%"
         )
 
-
     def __eq__(self, other):
         """
-        Compara si dos usuarios son el mismo (mismo nombre).
+        Compara si dos usuarios son iguales según su nombre.
         """
 
         if not isinstance(other, Usuario):
@@ -94,7 +133,7 @@ class Usuario:
 
     def __lt__(self, other):
         """
-        Permite comparar usuarios por puntuación.
+        Permite comparar usuarios según su puntuación.
         """
 
         if not isinstance(other, Usuario):
@@ -102,6 +141,9 @@ class Usuario:
 
         return self.puntuacion < other.puntuacion
 
-
     def __str__(self):
+        """
+        Devuelve una representación en texto del usuario.
+        """
+
         return self.estadisticas()
