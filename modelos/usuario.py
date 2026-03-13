@@ -131,15 +131,15 @@ class Usuario:
 
         return self.nombre == other.nombre
 
-    def __lt__(self, other):
+    def __eq__(self, other):
         """
-        Permite comparar usuarios según su puntuación.
+        Permite comprobar si dos usuarios son iguales.
+        Se consideran iguales si tienen el mismo nombre.
         """
-
         if not isinstance(other, Usuario):
-            return NotImplemented
+            return False
 
-        return self.puntuacion < other.puntuacion
+        return self.nombre == other.nombre
 
     def __str__(self):
         """
