@@ -121,15 +121,7 @@ class Usuario:
             f"Porcentaje de acierto: {self.calcular_porcentaje():.2f}%"
         )
 
-    def __eq__(self, other):
-        """
-        Compara si dos usuarios son iguales según su nombre.
-        """
 
-        if not isinstance(other, Usuario):
-            return False
-
-        return self.nombre == other.nombre
 
     def __eq__(self, other):
         """
