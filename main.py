@@ -46,7 +46,7 @@ opcion = ""
 
 while opcion != "5":
 
-    print("\n===== MENÚ =====")
+    print("\n*** MENÚ ***")
     print("1. Ejercicio de escritura")
     print("2. Ejercicio tipo test")
     print("3. Añadir tarjeta al mazo")
@@ -122,7 +122,7 @@ while opcion != "5":
 
     elif opcion == "3":
 
-        print("\n--- AÑADIR TARJETA ---")
+        print("\n** AÑADIR TARJETA **")
 
         try:
             palabra = input("Palabra: ")
@@ -140,7 +140,7 @@ while opcion != "5":
 
     elif opcion == "4":
 
-        print("\n===== ESTADÍSTICAS =====")
+        print("\n*** ESTADÍSTICAS ***")
         print(usuario)
 
     elif opcion == "5":
