@@ -1,12 +1,10 @@
 """Modulo principal del sistema de práctica de vocabulario."""
 
-import random
 from modelos.tarjeta import Tarjeta
 from modelos.mazo import Mazo
 from modelos.usuario import Usuario
-from ejercicios.ejercicio_escritura import EjercicioEscritura
-from ejercicios.ejercicio_test import EjercicioTest
 from datos.persistencia import Persistencia
+from gestion.generador_ejercicios import GeneradorEjercicios
 
 
 print("\n=== SISTEMA DE PRÁCTICA DE VOCABULARIO ===\n")
@@ -29,6 +27,7 @@ if usuario is None or mazo is None:
 else:
     print(f"Datos cargados. Bienvenido de nuevo, {usuario.nombre}")
 
+
 opcion = ""
 
 while opcion != "5":
@@ -44,13 +43,12 @@ while opcion != "5":
 
     if opcion == "1":
 
-        tarjetas = mazo.tarjetas
+        generador = GeneradorEjercicios(mazo)
+        ejercicios = generador.generar_escritura()
 
-        for i, tarjeta in enumerate(tarjetas):
+        for i, ejercicio in enumerate(ejercicios):
 
-            ejercicio = EjercicioEscritura(tarjeta)
             ejercicio.mostrar()
-
             respuesta = input("Respuesta: ")
 
             try:
@@ -59,32 +57,26 @@ while opcion != "5":
                 usuario.actualizar_progreso(correcto, puntos)
 
                 if correcto:
-                    print("¡Correcto!")
+                    print("Correcto")
                 else:
-                    print("Incorrecto. Respuesta correcta:", tarjeta.traduccion)
+                    print("Incorrecto")
 
             except ValueError as e:
                 print(f"Error: {e}")
 
-            if i < len(tarjetas) - 1:
+            if i < len(ejercicios) - 1:
                 continuar = input("¿Quieres continuar? (s/n): ")
                 if continuar.lower() == "n":
                     break
 
     elif opcion == "2":
 
-        tarjetas = mazo.tarjetas
+        generador = GeneradorEjercicios(mazo)
+        ejercicios = generador.generar_test()
 
-        for i, tarjeta in enumerate(tarjetas):
+        for i, ejercicio in enumerate(ejercicios):
 
-            opciones = [t.traduccion for t in mazo.tarjetas if t != tarjeta]
-            opciones = opciones[:3]
-            opciones.append(tarjeta.traduccion)
-            random.shuffle(opciones)
-
-            ejercicio = EjercicioTest(tarjeta, opciones)
             ejercicio.mostrar()
-
             respuesta = input("Opción (A/B/C/D): ")
 
             try:
@@ -93,14 +85,14 @@ while opcion != "5":
                 usuario.actualizar_progreso(correcto, puntos)
 
                 if correcto:
-                    print("¡Correcto!")
+                    print("Correcto")
                 else:
-                    print("Incorrecto. Respuesta correcta:", tarjeta.traduccion)
+                    print("Incorrecto")
 
-            except (ValueError, IndexError) as e:
+            except Exception as e:
                 print(f"Error: {e}")
 
-            if i < len(tarjetas) - 1:
+            if i < len(ejercicios) - 1:
                 continuar = input("¿Quieres continuar? (s/n): ")
                 if continuar.lower() == "n":
                     break
