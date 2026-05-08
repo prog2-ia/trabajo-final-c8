@@ -1,4 +1,8 @@
-"""Modulo principal del sistema de práctica de vocabulario."""
+"""Módulo principal del sistema de práctica de vocabulario.
+
+Gestiona la ejecución del programa mediante un menú interactivo que permite
+realizar ejercicios, añadir tarjetas y consultar estadísticas.
+"""
 
 from modelos.tarjeta import Tarjeta
 from modelos.mazo import Mazo
@@ -7,9 +11,8 @@ from datos.persistencia import Persistencia
 from gestion.generador_ejercicios import GeneradorEjercicios
 
 
-print("\n=== SISTEMA DE PRÁCTICA DE VOCABULARIO ===\n")
+print("\n ***** SISTEMA DE PRÁCTICA DE VOCABULARIO ***** \n")
 
-# Cargar datos si existen
 usuario, mazo = Persistencia.cargar()
 
 if usuario is None or mazo is None:
@@ -56,17 +59,13 @@ while opcion != "5":
                 puntos = ejercicio.obtener_puntuacion()
                 usuario.actualizar_progreso(correcto, puntos)
 
-                if correcto:
-                    print("Correcto")
-                else:
-                    print("Incorrecto")
+                print("Correcto" if correcto else "Incorrecto")
 
             except ValueError as e:
                 print(f"Error: {e}")
 
             if i < len(ejercicios) - 1:
-                continuar = input("¿Quieres continuar? (s/n): ")
-                if continuar.lower() == "n":
+                if input("¿Quieres continuar? (s/n): ").lower() == "n":
                     break
 
     elif opcion == "2":
@@ -84,17 +83,13 @@ while opcion != "5":
                 puntos = ejercicio.obtener_puntuacion()
                 usuario.actualizar_progreso(correcto, puntos)
 
-                if correcto:
-                    print("Correcto")
-                else:
-                    print("Incorrecto")
+                print("Correcto" if correcto else "Incorrecto")
 
             except Exception as e:
                 print(f"Error: {e}")
 
             if i < len(ejercicios) - 1:
-                continuar = input("¿Quieres continuar? (s/n): ")
-                if continuar.lower() == "n":
+                if input("¿Quieres continuar? (s/n): ").lower() == "n":
                     break
 
     elif opcion == "3":
@@ -107,9 +102,7 @@ while opcion != "5":
             categoria = input("Categoría: ")
             nivel = int(input("Nivel de dificultad (1-5): "))
 
-            nueva = Tarjeta(palabra, traduccion, categoria, nivel)
-            mazo.anadir_tarjeta(nueva)
-
+            mazo.anadir_tarjeta(Tarjeta(palabra, traduccion, categoria, nivel))
             print(f"Tarjeta '{palabra}' añadida correctamente.")
 
         except ValueError as e:
@@ -124,7 +117,7 @@ while opcion != "5":
 
         Persistencia.guardar(usuario, mazo)
         print("\nDatos guardados.")
-        print("Programa finalizado.")
+        print("Fin del programa.")
 
     else:
         print("Opción no válida.")
