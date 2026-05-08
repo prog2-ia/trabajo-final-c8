@@ -1,25 +1,4 @@
-"""Modulo principal del sistema de práctica de vocabulario.
-Este módulo se encarga de gestionar la ejecución del programa mediante un menú interactivo
-que permite al usuario practicar vocabulario, añadir nuevas tarjetas y consultar sus estadísticas.
-Se inicializan los objetos principales del sistema como Usuario, Tarjeta y Mazo, y se utilizan
-las clases de ejercicios para evaluar las respuestas del usuario. Además, controla el flujo
-del programa mediante un bucle que gestiona las distintas opciones seleccionadas.
-Funciones:
-    - main (flujo principal implícito en el script)
-    Controla la ejecución del programa mediante un menú interactivo.
-Opciones del menú:
-    - Ejercicio de escritura
-    - Ejercicio tipo test
-    - Añadir tarjeta al mazo
-    - Ver estadísticas
-    - Salir
-Comportamiento:
-    - Se solicita el nombre del usuario al iniciar el programa.
-    - Se crea un mazo inicial con tarjetas de ejemplo.
-    - Se ejecuta un bucle que muestra el menú hasta que el usuario decide salir.
-    - Se actualiza el progreso del usuario tras cada ejercicio.
-    - Se gestionan errores de entrada mediante excepciones.
-"""
+"""Modulo principal del sistema de práctica de vocabulario."""
 
 import random
 from modelos.tarjeta import Tarjeta
@@ -27,20 +6,28 @@ from modelos.mazo import Mazo
 from modelos.usuario import Usuario
 from ejercicios.ejercicio_escritura import EjercicioEscritura
 from ejercicios.ejercicio_test import EjercicioTest
+from datos.persistencia import Persistencia
+
 
 print("\n=== SISTEMA DE PRÁCTICA DE VOCABULARIO ===\n")
 
-nombre = input("Introduce tu nombre: ")
-usuario = Usuario(nombre)
+# Cargar datos si existen
+usuario, mazo = Persistencia.cargar()
 
-t1 = Tarjeta("dog", "perro", "animales", 1)
-t2 = Tarjeta("cat", "gato", "animales", 1)
-t3 = Tarjeta("house", "casa", "objetos", 2)
+if usuario is None or mazo is None:
+    nombre = input("Introduce tu nombre: ")
+    usuario = Usuario(nombre)
 
-mazo = Mazo("Vocabulario básico")
-mazo.anadir_tarjeta(t1)
-mazo.anadir_tarjeta(t2)
-mazo.anadir_tarjeta(t3)
+    t1 = Tarjeta("dog", "perro", "animales", 1)
+    t2 = Tarjeta("cat", "gato", "animales", 1)
+    t3 = Tarjeta("house", "casa", "objetos", 2)
+
+    mazo = Mazo("Vocabulario básico")
+    mazo.anadir_tarjeta(t1)
+    mazo.anadir_tarjeta(t2)
+    mazo.anadir_tarjeta(t3)
+else:
+    print(f"Datos cargados. Bienvenido de nuevo, {usuario.nombre}")
 
 opcion = ""
 
@@ -69,7 +56,6 @@ while opcion != "5":
             try:
                 correcto = ejercicio.comprobar_respuesta(respuesta)
                 puntos = ejercicio.obtener_puntuacion()
-
                 usuario.actualizar_progreso(correcto, puntos)
 
                 if correcto:
@@ -104,7 +90,6 @@ while opcion != "5":
             try:
                 correcto = ejercicio.comprobar_respuesta(respuesta)
                 puntos = ejercicio.obtener_puntuacion()
-
                 usuario.actualizar_progreso(correcto, puntos)
 
                 if correcto:
@@ -145,7 +130,9 @@ while opcion != "5":
 
     elif opcion == "5":
 
-        print("\nPrograma finalizado.")
+        Persistencia.guardar(usuario, mazo)
+        print("\nDatos guardados.")
+        print("Programa finalizado.")
 
     else:
         print("Opción no válida.")
