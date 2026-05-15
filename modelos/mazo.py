@@ -75,6 +75,12 @@ class Mazo:
         """Mezcla aleatoriamente las tarjetas."""
         random.shuffle(self._tarjetas)
 
+    def obtener_tarjetas(self):
+        """
+        Devuelve una copia de la lista de tarjetas del mazo.
+        """
+        return self._tarjetas.copy()
+
     def __add__(self, other):
         """
         Une dos mazos en uno nuevo.
